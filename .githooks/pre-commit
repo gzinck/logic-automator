@@ -1,0 +1,10 @@
+#!/bin/bash
+
+STAGED_PY_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep ".py\{0,1\}$")
+BLACK='python -m black'
+
+for FILE in $STAGED_PY_FILES; do
+    echo $FILE
+    $BLACK $FILE
+    git add $FILE
+done
